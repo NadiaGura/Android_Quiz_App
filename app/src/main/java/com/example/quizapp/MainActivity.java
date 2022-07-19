@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int score = 0;
     int totalQuestions = Questions.question.length;
     int currentQuestionIndex = 0;
-    String selectedAnswer = "";
+    String selectedAnswer = ""; //selected answer initialized as an empty String
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +76,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             currentQuestionIndex++; //go to next question
             newQuestion(); //newQuestion method called when changing index of the question to the next one
+//            totalQuestions--;
 
 
         }else{
             //button clicked
             selectedAnswer = clickedButton.getText().toString();
-            clickedButton.setBackgroundColor(Color.MAGENTA);
+            clickedButton.setBackgroundColor(Color.LTGRAY);
         }
     }
 
     void newQuestion(){
 
-        if(currentQuestionIndex == totalQuestions){
+        if(currentQuestionIndex == totalQuestions){ //finish quiz when all questions are answered
             finishQuiz();
             return;
         }
@@ -103,23 +104,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void finishQuiz(){
         String passQuizScore = "";
-        if(score> totalQuestions * 0.70){
+        if(score> totalQuestions * 0.70){ //passed if more than 70% are correct
             passQuizScore = "Passed";
         }else{
             passQuizScore = "Failed";
         }
 
-        //ALERT MESSAGE
+        //ALERT MESSAGE TO NOTIFY ABOUT SCORE
         new AlertDialog.Builder(this).setTitle(passQuizScore)
                 .setMessage("Your score is " + score + "out of " +totalQuestions)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz()) //lambda
+                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz()) //lambda for representing func restartQuiz()
                 .setCancelable(false)
                 .show();
-
     }
+
     void restartQuiz(){
         score = 0;
         currentQuestionIndex = 0;
-        newQuestion();
+        newQuestion(); // loading quiz from start
     }
 }
