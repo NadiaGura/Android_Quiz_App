@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         answerD.setText(Questions.choices[currentQuestionIndex][3]);
     }
 
+
     //METHOD when finish the quiz. If successful score > 70% - Pass status will be displayed, else -> Failed message.
 
     void finishQuiz(){
